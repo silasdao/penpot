@@ -60,7 +60,7 @@ def print_error(res):
 
 def run_cmd(params):
     try:
-        expr = "(app.srepl.ext/run-json-cmd {})".format(encode(params))
+        expr = f"(app.srepl.ext/run-json-cmd {encode(params)})"
         res, failed = send_eval(expr)
         if failed:
             print_error(res)
@@ -68,7 +68,7 @@ def run_cmd(params):
 
         return res
     except Exception as cause:
-        print("EXC:", str(cause))
+        print("EXC:", cause)
         sys.exit(-2)
 
 def create_profile(fullname, email, password):
@@ -97,7 +97,7 @@ def update_profile(email, fullname, password, is_active):
 
     res = run_cmd(params)
     if res is True:
-        print(f"Updated")
+        print("Updated")
     else:
         print(f"No profile found with email {email}")
 
@@ -112,7 +112,7 @@ def delete_profile(email, soft):
 
     res = run_cmd(params)
     if res is True:
-        print(f"Deleted")
+        print("Deleted")
     else:
         print(f"No profile found with email {email}")
 
